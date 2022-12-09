@@ -1,11 +1,11 @@
 import { Line, G2 } from '@ant-design/plots';
 import { each, findIndex } from '@antv/util';
 
-import { hemData, colData } from './mock/mock';
+import { hemData } from './mock/mock';
 
 const { InteractionAction, registerInteraction, registerAction } = G2;
 
-export const DemoLine = () => {
+export const Chartview = () => {
 
    const data = hemData.data;
 
@@ -166,5 +166,10 @@ export const DemoLine = () => {
       ],
    };
 
-   return <Line {...config} />;
+   return (
+      <>
+         <div>{}</div>
+         <Line {...config} />
+      </>
+   );
 };

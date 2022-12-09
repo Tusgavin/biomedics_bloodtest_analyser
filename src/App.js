@@ -1,9 +1,9 @@
-import React from 'react';
-import { Col, Row } from 'antd';
+import React, { useState } from 'react';
 import { LineChartOutlined, TableOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 
-import { DemoLine } from './components/chart';
+import { Chartview } from './components/Chart';
+import { Tableview } from './components/Table';
 
 import './App.css'
 
@@ -17,30 +17,32 @@ const menu = [{
   name: "Table"
 }]
 
-function App() {
+const App = () => {
+  const [active, setActive] = useState(0);
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider breakpoint="lg" collapsedWidth="0">
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['0']}
           items={menu.map(
             (item, index) => ({
-              key: String(index + 1),
+              key: String(index),
               icon: React.createElement(item.icon),
               label: `${item.name}`
             }),
           )}
+          onClick={({key}) => setActive(key)}
         />
       </Sider>
       <Layout>
-        <Content style={{ margin: '40px 20px' }}>
-          <Row>
-            <Col span={16} offset={4}>
-              <DemoLine />
-            </Col>
-          </Row> 
+        <Content style={{ margin: '60px 60px' }}>
+          <div style={{ height: '100%' }}>
+            { active === '0' && <Chartview />}
+            { active === '1' && <Tableview />}
+            </div>
         </Content>
       </Layout>
     </Layout>
