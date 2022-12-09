@@ -1,35 +1,50 @@
-import React from 'react';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import React, { useState } from 'react';
+import { LineChartOutlined, TableOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
 
-const { Header, Content, Footer } = Layout;
+import { Chartview } from './components/Chart';
+import { Tableview } from './components/Table';
 
-function App() {
+import './App.css'
+
+const { Content, Sider } = Layout;
+
+const menu = [{
+  icon: LineChartOutlined,
+  name: "Chart"
+}, {
+  icon: TableOutlined,
+  name: "Table"
+}]
+
+const App = () => {
+  const [active, setActive] = useState(0);
+
   return (
-    <Layout className="layout">
-      <Header>
-        <div className="logo" />
+    <Layout style={{ height: "100vh" }}>
+      <Sider breakpoint="lg" collapsedWidth="0">
         <Menu
           theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
+          mode="inline"
+          defaultSelectedKeys={['0']}
+          items={menu.map(
+            (item, index) => ({
+              key: String(index),
+              icon: React.createElement(item.icon),
+              label: `${item.name}`
+            }),
+          )}
+          onClick={({key}) => setActive(key)}
         />
-      </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <div className="site-layout-content">Content</div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </Sider>
+      <Layout>
+        <Content style={{ margin: '60px 60px' }}>
+          <div style={{ height: '100%' }}>
+            { active === '0' && <Chartview />}
+            { active === '1' && <Tableview />}
+            </div>
+        </Content>
+      </Layout>
     </Layout>
   );
 }
