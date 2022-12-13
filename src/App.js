@@ -21,7 +21,7 @@ const App = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", height: "fit-content" }}>
       <Sider breakpoint="lg" collapsedWidth="0">
         <Menu
           theme="dark"
