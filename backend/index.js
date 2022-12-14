@@ -30,7 +30,10 @@ app.get("/", (req, res) => {
 
 app.post('/save', async (req, res) => {
    try {
-      const exam = Exam.create(req.body);
+      let _exam = req.body;
+      _exam.dataDaConsulta = new Date(_exam.dataDaConsulta).toLocaleDateString("en-GB");
+      console.log(_exam)
+      let exam = Exam.create(_exam);
       return res.status(200).send({ exam });
    } catch (err) {
       return res.status(400).send({ error: 'Failed to save exam' });
@@ -42,7 +45,7 @@ app.get('/pull', async (req, res) => {
    const exams = await Exam.find({ cpf });
 
    if (!exams) {
-      return res.status(400).send({ error: 'Failed to save exam' });
+      return res.status(400).send({ error: 'Failed to pull exam' });
    }
 
    return res.status(200).send({ exams });

@@ -49,6 +49,9 @@ const ExamSchema = new mongoose.Schema({
    cpf: {
       type: String,
       required: true
+   },
+   dataDaConsulta: {
+      type: String
    }
 });
 
