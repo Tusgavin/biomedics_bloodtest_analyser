@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LineChartOutlined, TableOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
 import { Chartview } from "./components/Chart";
 import { Tableview } from "./components/Table";
+import { getExams } from './api';
 
 import "./App.css";
 
@@ -43,8 +44,29 @@ const menu = [
   getItem("Table", "2", TableOutlined),
 ];
 
+const getChartData = (arr, field) => {
+  return arr.map((item) => {
+    if (field == "0") field = "colesterolHDL"
+    return {
+      value: item[field],
+      date: item.dataDaConsulta
+    }
+  })
+}
+
 const App = () => {
   const [active, setActive] = useState(0);
+  const [examList, setExamList] = useState([]);
+
+
+  const getExamFromAPI = async () => {
+    const res = await getExams("63061224010");
+    setExamList(res);
+  };
+
+  useEffect(() => {
+    getExamFromAPI();
+  }, []);
 
   return (
     <Layout style={{ minHeight: "100vh", height: "fit-content" }}>
@@ -65,7 +87,7 @@ const App = () => {
       <Layout>
         <Content style={{ margin: "60px 60px" }}>
           <div style={{ height: "100%" }}>
-            {active !== "1" ? <Chartview exam={active} /> : <Tableview />}
+            {active !== "1" ? <Chartview exam={getChartData(examList, active)} /> : <Tableview exam={examList} />}
           </div>
         </Content>
       </Layout>

@@ -6,5 +6,5 @@ const api = axios.create({
 
 export const getExams = async (cpf) => {
    const exams = await api.get(`/pull?cpf=${cpf}`);
-   return exams;
+   return exams.data.exams;
 }

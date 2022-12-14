@@ -1,3 +1,4 @@
+import React from 'react';
 import { Line, G2 } from "@ant-design/plots";
 import { each, findIndex } from "@antv/util";
 
@@ -5,10 +6,8 @@ import { hemData } from "./mock/mock";
 
 const { InteractionAction, registerInteraction, registerAction } = G2;
 
-export const Chartview = (exam) => {
-  const data = hemData.data;
-
-  exam = exam["exam"];
+export const Chartview = ({ exam }) => {
+  const data = exam
 
   G2.registerShape("point", "custom-point", {
     draw(cfg, container) {
