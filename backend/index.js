@@ -41,7 +41,7 @@ app.post('/save', async (req, res) => {
 })
 
 app.get('/pull', async (req, res) => {
-   const { cpf } = req.body;
+   const { cpf } = req.query;
    const exams = await Exam.find({ cpf });
 
    if (!exams) {
