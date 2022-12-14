@@ -21,20 +21,24 @@ function getItem(label, key, icon, children, type) {
 
 const menu = [
   getItem("Charts", "1", LineChartOutlined, [
-    getItem("Colesterol HDL", "sub1"),
-    getItem("Colesterol LDL", "sub2"),
-    getItem("Colesterol não-LDL", "sub3"),
-    getItem("Colesterol Total", "sub4"),
-    getItem("Colesterol VLDL", "sub5"),
-    getItem("Creatinina", "sub6"),
-    getItem("Glicemia", "sub7"),
-    getItem("Hemacias", "sub8"),
-    getItem("Hemoglobina", "sub9"),
-    getItem("Índice de Saturacao da Transferrina", "sub10"),
-    getItem("Leucocitos", "sub11"),
-    getItem("T4 Livre", "sub12"),
-    getItem("Triglicerides", "sub13"),
-    getItem("TSH Ultra Sensível", "sub14"),
+    getItem("Colesterol HDL", "colesterolHDL"),
+    getItem("Colesterol LDL", "colesterolLDL"),
+    getItem("Colesterol não-LDL", "colesterolNaoLDL"),
+    getItem("Colesterol Total", "colesterolTotal"),
+    getItem("Colesterol VLDL", "colesterolVLDL"),
+    getItem("Creatinina", "creatinina"),
+    getItem("Glicemia", "glicemia"),
+    getItem("Hemacias", "hemacias"),
+    getItem("Hemoglobina", "hemoglobina"),
+    getItem(
+      "Índice de Saturacao da Transferrina",
+      "indiceDeSaturacaoDaTransferrina"
+    ),
+    getItem("Plaquetas", "plaquetas"),
+    getItem("Leucocitos", "leucocitos"),
+    getItem("T4 Livre", "tQuatroLivre"),
+    getItem("Triglicerides", "triglicerides"),
+    getItem("TSH Ultra Sensível", "tshUltraSensivel"),
   ]),
   getItem("Table", "2", TableOutlined),
 ];
@@ -61,7 +65,7 @@ const App = () => {
       <Layout>
         <Content style={{ margin: "60px 60px" }}>
           <div style={{ height: "100%" }}>
-            {active !== "1" ? <Chartview /> : <Tableview />}
+            {active !== "1" ? <Chartview exam={active} /> : <Tableview />}
           </div>
         </Content>
       </Layout>
